@@ -9,7 +9,7 @@ on:
       - 'main'
       - 'gh-action-test'
     paths:
-      - /containers/nexus/**/*
+      - containers/nexus/**
 
 concurrency:
   group: publish
@@ -32,7 +32,6 @@ jobs:
         uses: docker/metadata-action@369eb591f429131d6889c46b94e711f089e6ca96 # 5.6.1
         with:
           images: |
-            rh-ee-mbekhta/proxy-nexus3
             quay.io/rh-ee-mbekhta/proxy-nexus3
           # generate Docker tags based on the following events/attributes
           tags: |
@@ -55,6 +54,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@ca877d9245402d1537745e0e356eab47c3520991 # 6.13.0
         with:
+          push: true
           context: ./containers/nexus/
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

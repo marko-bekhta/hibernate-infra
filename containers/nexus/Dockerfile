@@ -6,4 +6,6 @@ EXPOSE 8081
 EXPOSE 8181
 USER nexus
 
+
+
 CMD ["/opt/sonatype/init_and_run.sh"]
